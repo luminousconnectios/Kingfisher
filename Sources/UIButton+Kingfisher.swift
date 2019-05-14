@@ -52,7 +52,7 @@ extension Kingfisher where Base: UIButton {
      */
     @discardableResult
     public func setImage(with resource: Resource?,
-                         for state: UIControlState,
+                         for state: UIControl.State,
                          placeholder: UIImage? = nil,
                          options: KingfisherOptionsInfo? = nil,
                          progressBlock: DownloadProgressBlock? = nil,
@@ -130,7 +130,7 @@ extension Kingfisher where Base: UIButton {
      */
     @discardableResult
     public func setBackgroundImage(with resource: Resource?,
-                                   for state: UIControlState,
+                                   for state: UIControl.State,
                                    placeholder: UIImage? = nil,
                                    options: KingfisherOptionsInfo? = nil,
                                    progressBlock: DownloadProgressBlock? = nil,
@@ -200,11 +200,11 @@ extension Kingfisher where Base: UIButton {
      
      - returns: Current URL for image.
      */
-    public func webURL(for state: UIControlState) -> URL? {
+    public func webURL(for state: UIControl.State) -> URL? {
         return webURLs[NSNumber(value:state.rawValue)] as? URL
     }
     
-    fileprivate func setWebURL(_ url: URL?, for state: UIControlState) {
+    fileprivate func setWebURL(_ url: URL?, for state: UIControl.State) {
         webURLs[NSNumber(value:state.rawValue)] = url
     }
     
@@ -243,11 +243,11 @@ extension Kingfisher where Base: UIButton {
      
      - returns: Current URL for background image.
      */
-    public func backgroundWebURL(for state: UIControlState) -> URL? {
+    public func backgroundWebURL(for state: UIControl.State) -> URL? {
         return backgroundWebURLs[NSNumber(value:state.rawValue)] as? URL
     }
     
-    fileprivate func setBackgroundWebURL(_ url: URL?, for state: UIControlState) {
+    fileprivate func setBackgroundWebURL(_ url: URL?, for state: UIControl.State) {
         backgroundWebURLs[NSNumber(value:state.rawValue)] = url
     }
     
@@ -299,7 +299,7 @@ extension UIButton {
     message: "Extensions directly on UIButton are deprecated. Use `button.kf.setImage` instead.",
     renamed: "kf.setImage")
     public func kf_setImage(with resource: Resource?,
-                                for state: UIControlState,
+                            for state: UIControl.State,
                               placeholder: UIImage? = nil,
                                   options: KingfisherOptionsInfo? = nil,
                             progressBlock: DownloadProgressBlock? = nil,
@@ -339,7 +339,7 @@ extension UIButton {
     message: "Extensions directly on UIButton are deprecated. Use `button.kf.setBackgroundImage` instead.",
     renamed: "kf.setBackgroundImage")
     public func kf_setBackgroundImage(with resource: Resource?,
-                                      for state: UIControlState,
+                                      for state: UIControl.State,
                                       placeholder: UIImage? = nil,
                                       options: KingfisherOptionsInfo? = nil,
                                       progressBlock: DownloadProgressBlock? = nil,
@@ -368,10 +368,10 @@ extension UIButton {
     @available(*, deprecated,
         message: "Extensions directly on UIButton are deprecated. Use `button.kf.webURL` instead.",
         renamed: "kf.webURL")
-    public func kf_webURL(for state: UIControlState) -> URL? { return kf.webURL(for: state) }
+    public func kf_webURL(for state: UIControl.State) -> URL? { return kf.webURL(for: state) }
     
     @available(*, deprecated, message: "Extensions directly on UIButton are deprecated.",renamed: "kf.setWebURL")
-    fileprivate func kf_setWebURL(_ url: URL, for state: UIControlState) { kf.setWebURL(url, for: state) }
+    fileprivate func kf_setWebURL(_ url: URL, for state: UIControl.State) { kf.setWebURL(url, for: state) }
     
     @available(*, deprecated, message: "Extensions directly on UIButton are deprecated.",renamed: "kf.webURLs")
     fileprivate var kf_webURLs: NSMutableDictionary { return kf.webURLs }
@@ -395,11 +395,11 @@ extension UIButton {
     @available(*, deprecated,
     message: "Extensions directly on UIButton are deprecated. Use `button.kf.backgroundWebURL` instead.",
     renamed: "kf.backgroundWebURL")
-    public func kf_backgroundWebURL(for state: UIControlState) -> URL? { return kf.backgroundWebURL(for: state) }
+    public func kf_backgroundWebURL(for state: UIControl.State) -> URL? { return kf.backgroundWebURL(for: state) }
     
     @available(*, deprecated,
     message: "Extensions directly on UIButton are deprecated.",renamed: "kf.setBackgroundWebURL")
-    fileprivate func kf_setBackgroundWebURL(_ url: URL, for state: UIControlState) {
+    fileprivate func kf_setBackgroundWebURL(_ url: URL, for state: UIControl.State) {
         kf.setBackgroundWebURL(url, for: state)
     }
     

@@ -61,7 +61,7 @@ open class AnimatedImageView: UIImageView {
     public var needsPrescaling = true
     
     /// The animation timer's run loop mode. Default is `NSRunLoopCommonModes`. Set this property to `NSDefaultRunLoopMode` will make the animation pause during UIScrollView scrolling.
-    public var runLoopMode = RunLoopMode.commonModes {
+    public var runLoopMode = RunLoop.Mode.common {
         willSet {
             if runLoopMode == newValue {
                 return
@@ -150,11 +150,7 @@ open class AnimatedImageView: UIImageView {
         didMove()
     }
 
-    // This is for back compatibility that using regular UIImageView to show animated image.
-    override func shouldPreloadAllAnimation() -> Bool {
-        return false
-    }
-
+  
     // MARK: - Private method
     /// Reset the animator.
     private func reset() {
@@ -233,7 +229,7 @@ class Animator {
         return frame(at: currentFrameIndex)
     }
     
-    var contentMode = UIViewContentMode.scaleToFill
+    var contentMode = UIView.ContentMode.scaleToFill
     
     private lazy var preloadQueue: DispatchQueue = {
         return DispatchQueue(label: "com.onevcat.Kingfisher.Animator.preloadQueue")
@@ -249,7 +245,7 @@ class Animator {
      
      - returns: The animator object.
      */
-    init(imageSource source: CGImageSource, contentMode mode: UIViewContentMode, size: CGSize, framePreloadCount count: Int) {
+    init(imageSource source: CGImageSource, contentMode mode: UIView.ContentMode, size: CGSize, framePreloadCount count: Int) {
         self.imageSource = source
         self.contentMode = mode
         self.size = size
@@ -372,11 +368,3 @@ private func pure<T>(_ value: T) -> [T] {
     return [value]
 }
 
-// MARK: - Deprecated. Only for back compatibility.
-extension AnimatedImageView {
-    // This is for back compatibility that using regular UIImageView to show GIF.
-    @available(*, deprecated, renamed: "shouldPreloadAllAnimation")
-    override func shouldPreloadAllGIF() -> Bool {
-        return false
-    }
-}
